@@ -14,7 +14,7 @@ Este programa permite fazer backup e restaurar as **pastas de save** do jogo Rep
 
 ### Instalação
 
-1. Certifique-se de ter o Python 3 instalado no seu sistema
+1. Cetifique-se de ter o Python 3 instalado no seu sistema
 2. No Windows, você pode baixar o Python em: https://www.python.org/downloads/
 3. Durante a instalação, marque a opção "Add Python to PATH"
 
