@@ -126,6 +126,15 @@ Se a pasta não for encontrada:
 
 ## 💾 Como Fazer Backup
 
+### ⚠️ **AVISO IMPORTANTE: QUANDO FAZER O BACKUP?**
+
+Para garantir a integridade dos seus saves e evitar erros, é crucial fazer o backup em momentos específicos do jogo:
+
+*   **Ao chegar em uma loja:** Este é um ponto seguro onde o jogo geralmente salva o progresso de forma estável.
+*   **Ao iniciar um novo mapa/área:** Antes de entrar em uma nova área, o jogo costuma criar um novo save point.
+
+**Fazer o backup durante o jogo ativo, especialmente em momentos de transição ou combate, pode resultar em saves corrompidos ou incompletos.** Sempre que possível, faça o backup em um momento de "calma" no jogo.
+
 ### Passo a Passo
 1. **Selecione uma pasta de save** na lista esquerda (clique uma vez)
 2. **Clique no botão "💾 Fazer Backup"**
