@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     try:
         img = Image.open(input_png_path)
-        img.save(output_ico_path, format="ICO")
+        img.save(output_ico_path, format='ICO')
         print(f"Imagem {input_png_path} convertida com sucesso para {output_ico_path}")
     except Exception as e:
         print(f"Erro ao converter imagem: {e}")
