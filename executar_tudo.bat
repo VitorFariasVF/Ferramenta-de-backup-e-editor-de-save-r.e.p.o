@@ -16,9 +16,13 @@ if %errorlevel% neq 0 (
 )
 
 REM --- VERIFICACAO DE ARQUIVOS ESSENCIAIS ---
-set "PROGRAM_FILE=backup_saves_enhanced_with_editor.py"
-set "TRANSLATIONS_FILE=translations.json"
-set "EDITOR_CORE_FILE=save_editor_core.py"
+set "PROGRAM_DIR=program"
+set "TRANSLATIONS_DIR=translations"
+set "DOCS_DIR=docs"
+
+set "PROGRAM_FILE=%PROGRAM_DIR%\backup_saves_enhanced_with_editor.py"
+set "TRANSLATIONS_FILE=%TRANSLATIONS_DIR%\translations.json"
+set "EDITOR_CORE_FILE=%PROGRAM_DIR%\save_editor_core.py"
 
 if not exist "%PROGRAM_FILE%" (
     echo ERRO: Arquivo %PROGRAM_FILE% nao encontrado.
@@ -86,5 +90,6 @@ if %errorlevel% neq 0 (
 echo.
 echo Pressione qualquer tecla para continuar...
 pause >nul
+
 
 
