@@ -1,5 +1,34 @@
 # Ferramenta de Backup e Edição de Saves do REPO
 
+## Sumário
+
+- [Visão Geral do Projeto](#visão-geral-do-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Como Instalar](#como-instalar)
+- [Como Usar](#como-usar)
+  - [Fazer Backup de Saves](#fazer-backup-de-saves)
+  - [Restaurar Backups](#restaurar-backups)
+  - [Usar o Editor de Saves](#usar-o-editor-de-saves)
+  - [Alterar Pasta de Saves](#alterar-pasta-de-saves)
+- [Solução de Problemas Comuns](#solução-de-problemas-comuns)
+- [Licença](#licença)
+- [Baixar o Executável (Opcional)](#baixar-o-executável-opcional)
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [How to Install](#how-to-install)
+- [How to Use](#how-to-use)
+  - [Backing Up Saves](#backing-up-saves)
+  - [Restoring Backups](#restoring-backups)
+  - [Using the Save Editor](#using-the-save-editor)
+  - [Changing Save Folder](#changing-save-folder)
+- [Common Troubleshooting](#common-troubleshooting)
+- [License](#license)
+- [Download the Executable (Optional)](#download-the-executable-optional)
+
+
 ## Visão Geral do Projeto
 
 Esta ferramenta foi desenvolvida para facilitar o gerenciamento dos saves do jogo REPO, permitindo que os usuários criem backups de suas pastas de save, restaurem backups anteriores e, futuramente, editem o conteúdo dos saves. O objetivo é proporcionar uma maneira segura e conveniente de proteger o progresso do jogo e experimentar diferentes cenários sem o risco de perder dados importantes.
@@ -46,7 +75,7 @@ The application is built in Python, using the Tkinter library for the graphical 
 
 Para utilizar a ferramenta de backup e edição de saves do REPO, siga os passos abaixo:
 
-1.  **Baixe o Pacote**: Faça o download do arquivo `Ferramenta-de-backup-e-editor-de-save-repo.zip` (o pacote mais recente que você recebeu) e extraia todo o conteúdo para uma pasta de sua preferência (ex: `C:\BackupRepoSimples`). É crucial que todos os arquivos estejam na mesma pasta, sem subdiretórios.
+1.  **Baixe o Pacote**: Faça o download do arquivo `backup_saves_flat_structure.zip` (o pacote mais recente que você recebeu) e extraia todo o conteúdo para uma pasta de sua preferência (ex: `C:\BackupRepoSimples`). É crucial que todos os arquivos estejam na mesma pasta, sem subdiretórios.
 
 2.  **Instale as Dependências**: O programa requer algumas bibliotecas Python para funcionar. O arquivo `executar_tudo.bat` cuidará da instalação automática dessas dependências. Certifique-se de ter uma conexão ativa com a internet na primeira execução.
 
@@ -67,7 +96,7 @@ Após a instalação e, opcionalmente, a criação do ícone, o programa estará
 
 To use the REPO save backup and editing tool, follow the steps below:
 
-1.  **Download the Package**: Download the `Ferramenta-de-backup-e-editor-de-save-repo.zip` file (the latest package you received) and extract all its contents to a folder of your choice (e.g., `C:\BackupRepoSimple`). It is crucial that all files are in the same folder, without subdirectories.
+1.  **Download the Package**: Download the `backup_saves_flat_structure.zip` file (the latest package you received) and extract all its contents to a folder of your choice (e.g., `C:\BackupRepoSimple`). It is crucial that all files are in the same folder, without subdirectories.
 
 2.  **Install Dependencies**: The program requires some Python libraries to function. The `executar_tudo.bat` file will handle the automatic installation of these dependencies. Make sure you have an active internet connection on the first run.
 
@@ -197,7 +226,7 @@ If the executable does not open and displays no error message, it might be a mor
 
 *   **Run via CMD**: Open Command Prompt, navigate to the executable's folder, and run it directly (e.g., `your_program.exe`). This might reveal hidden error messages.
 *   **Antivirus/Firewall**: Your security software might be blocking the execution. Try temporarily disabling it (with caution) to check if it's the cause.
-*   **Hidden Dependencies**: Although `executar_tudo.bat` installs dependencies, in some rare cases, there might be dependencies that are not detected. If you are trying to generate an `.exe` with PyInstaller, make sure all `--add-data`, `--paths`, and `--hidden-import` are correctly configured.
+*   **Dependências Ocultas**: Embora o `executar_tudo.bat` instale as dependências, em alguns casos raros, pode haver dependências que não são detectadas. Se você estiver tentando gerar um `.exe` com PyInstaller, certifique-se de que todos os `--add-data`, `--paths` e `--hidden-import` estão configurados corretamente.
 
 
 
@@ -221,7 +250,8 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 Se você preferir uma versão pré-compilada do aplicativo, você pode baixá-la diretamente:
 
-- [Baixar RepoBackupTool.exe](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe)
+- [Baixar RepoBackupTool.exe]([SEU_LINK_DE_DOWNLOAD_AQUI](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe))
+
 
 
 
@@ -231,4 +261,9 @@ Se você preferir uma versão pré-compilada do aplicativo, você pode baixá-la
 
 If you prefer a pre-compiled version of the application, you can download it directly:
 
-- [Download RepoBackupTool.exe](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe)
+- [Download RepoBackupTool.exe]([YOUR_DOWNLOAD_LINK_HERE](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe))
+
+
+
+
+
