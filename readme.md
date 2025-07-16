@@ -264,6 +264,12 @@ If you prefer a pre-compiled version of the application, you can download it dir
 - [Download RepoBackupTool.exe](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe)
 
 
+<img width="795" height="633" alt="Captura de tela 2025-07-16 163917" src="https://github.com/user-attachments/assets/bacd539c-3dfe-495d-9591-fffb34b7e932" />
+<img width="797" height="624" alt="Captura de tela 2025-07-16 163909" src="https://github.com/user-attachments/assets/514095ee-02ff-4b09-a371-e3da2264e39c" />
+<img width="634" height="507" alt="Captura de tela 2025-07-16 163854" src="https://github.com/user-attachments/assets/0d3bb0b3-eb38-4f86-af4d-202ae559753b" />
+<img width="644" height="509" alt="Captura de tela 2025-07-16 163835" src="https://github.com/user-attachments/assets/61b1819b-9d07-451b-909b-135ab6c6d404" />
+<img width="296" height="274" alt="Captura de tela 2025-07-16 163812" src="https://github.com/user-attachments/assets/57ce5c6c-5262-4441-a846-419c6ffec3ca" />
+<img width="1210" height="737" alt="Captura de tela 2025-07-16 163624" src="https://github.com/user-attachments/assets/a269574e-416c-4595-a084-8a0aa2e565a4" />
 
 
 
