@@ -1,6 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+BackupSavesEnhancedApp - Enhanced Backup Tool for Repo Game Saves with Editor
+This application provides a modern graphical interface for backing up, restoring, and editing save files for the game Repo. It supports multiple languages and integrates advanced save editing features.
+Main Features:
+- Backup and restore save folders, including historical backups with timestamps.
+- Edit save files (.es3) using a built-in editor with world and player data tabs, and raw JSON editing.
+- Multi-language support with translations loaded from a JSON file.
+- Modern dark-themed UI using Tkinter.
+- Configuration management for language and save folder paths.
+- Status bar and user-friendly dialogs for warnings, errors, and confirmations.
+Classes:
+- Translations: Loads and manages language translations from a JSON file.
+- ModernStyle: Defines color constants for the application's dark theme.
+- SaveEditorWindow: Provides a window for editing save files, including world and player data.
+- BackupSavesEnhancedApp: Main application class for backup, restore, and save editing operations.
+Usage:
+Run the script to launch the GUI. Select a save folder to backup, restore, or edit. Change language and save folder path as needed.
+Note:
+Requires the save_editor_core module and translation/config JSON files in the same directory.
+
 Programa de Backup dos Saves do Jogo Repo - Versão Aprimorada com Editor
 Permite fazer backup, restaurar e EDITAR saves do jogo Repo com interface moderna e suporte a múltiplos idiomas
 Integra funcionalidades do R.E.P.O-Save-Editor
@@ -936,8 +955,8 @@ class BackupSavesEnhancedApp:
             file_names = [os.path.basename(f) for f in es3_files]
             choice_window = tk.Toplevel(self.root)
             choice_window.title(self.get_text("select_save_file"))
-            choice_window.geometry("400x300")
-            choice_window.minsize(400, 300) # Definindo tamanho mínimo
+            choice_window.geometry("640x480")
+            choice_window.minsize(640, 480) # Definindo tamanho mínimo
             choice_window.configure(bg=ModernStyle.BG_DARK)
             choice_window.transient(self.root)
             choice_window.grab_set()
@@ -1112,5 +1131,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = BackupSavesEnhancedApp(root)
     root.mainloop()
-
-
