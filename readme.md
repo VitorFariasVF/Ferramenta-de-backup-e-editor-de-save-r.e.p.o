@@ -250,7 +250,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 Se você preferir uma versão pré-compilada do aplicativo, você pode baixá-la diretamente:
 
-- [Baixar RepoBackupTool.exe]([SEU_LINK_DE_DOWNLOAD_AQUI](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe))
+- [Baixar RepoBackupTool.exe](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe)
 
 
 
@@ -261,7 +261,7 @@ Se você preferir uma versão pré-compilada do aplicativo, você pode baixá-la
 
 If you prefer a pre-compiled version of the application, you can download it directly:
 
-- [Download RepoBackupTool.exe]([YOUR_DOWNLOAD_LINK_HERE](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe))
+- [Download RepoBackupTool.exe](https://github.com/VitorFariasVF/Ferramenta-de-backup-e-editor-de-save-r.e.p.o/blob/main/App/RepoBackupTool.exe)
 
 
 
