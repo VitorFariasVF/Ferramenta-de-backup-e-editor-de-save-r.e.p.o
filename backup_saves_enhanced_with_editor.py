@@ -1001,92 +1001,74 @@ class BackupSavesEnhancedApp:
         except Exception as e:
             messagebox.showerror(self.get_text("error"), f"Erro ao abrir editor: {str(e)}")
             
+import os
+import shutil
+import re
+
+class BackupSavesEnhancedApp(BackupSavesEnhancedApp):
+    def extract_backup_name(self, selected_text):
+        """Extrai o nome real da pasta de backup a partir do texto da listbox"""
+        parts = selected_text.split(' | ')
+        if not parts:
+            return None
+
+        name_with_type = parts[0].strip()
+
+        historical_prefix = f"🕒 {self.get_text('historical')}"
+        current_prefix = f"⚡ {self.get_text('current')}"
+
+        if name_with_type.startswith(historical_prefix):
+            return name_with_type[len(historical_prefix):].strip()
+        elif name_with_type.startswith(current_prefix):
+            return name_with_type[len(current_prefix):].strip()
+
+        # Fallback: tenta extrair após o primeiro espaço
+        tokens = name_with_type.split(" ", 1)
+        return tokens[1].strip() if len(tokens) > 1 else tokens[0]
+
     def restore_backup(self):
         """Restaura o backup selecionado"""
         selection = self.backups_listbox.curselection()
         if not selection:
             messagebox.showwarning(self.get_text("warning"), self.get_text("select_backup"))
             return
-            
-        # Obter o texto completo da seleção da listbox
+
         selected_text = self.backups_listbox.get(selection[0])
-        
-        # Extrair o nome da pasta de backup do texto exibido na listbox
-        # O formato é "[emoji] [tipo] NOME_DA_PASTA | DATA"
-        # Precisamos isolar NOME_DA_PASTA
-        parts = selected_text.split(' | ')
-        if len(parts) > 0:
-            # Remove o emoji e o tipo (histórico/atual) do início
-            # Ex: "🕒 Historical MySave_backup_2023..." -> "MySave_backup_2023..."
-            # Ex: "⚡ Current MySave" -> "MySave"
-            name_with_type = parts[0].strip()
-            
-            # Remover o prefixo do tipo de backup (histórico ou atual)
-            # Isso é um pouco complexo porque o prefixo é traduzido e inclui emoji
-            # A forma mais robusta é tentar remover os prefixos conhecidos
-            historical_prefix = "🕒 " + self.get_text("historical")
-            current_prefix = "⚡ " + self.get_text("current")
-            
-            if name_with_type.startswith(historical_prefix):
-                actual_backup_name = name_with_type[len(historical_prefix):].strip()
-            elif name_with_type.startswith(current_prefix):
-                actual_backup_name = name_with_type[len(current_prefix):].strip()
-            else:
-                # Fallback, caso o formato mude ou não corresponda
-                actual_backup_name = name_with_type.split(' ', 1)[-1].strip() # Tenta remover o primeiro 
+        actual_backup_name = self.extract_backup_name(selected_text)
 
-            # Garantir que o nome do backup não contenha caracteres inválidos ou o emoji
-            # A forma mais segura é extrair o nome da pasta diretamente do caminho
-            # em vez de depender do texto exibido na listbox para o nome da pasta.
-            # No entanto, como a listbox é a fonte da seleção, precisamos garantir que o nome
-            # extraído corresponda ao nome real da pasta no disco.
-            # A correção anterior já tentava remover o emoji e espaços, mas pode não ser suficiente.
-            # Vamos garantir que o nome da pasta seja extraído de forma mais robusta.
-            
-            # Remove qualquer emoji ou caracteres não alfanuméricos do início do nome
-            import re
-            actual_backup_name = re.sub(r'^[\s\S]*?[a-zA-Z0-9]', '', actual_backup_name).strip()
-            
-            # Se o nome ainda contiver o prefixo de tradução, remova-o
-            if actual_backup_name.startswith(self.get_text("historical")):
-                actual_backup_name = actual_backup_name[len(self.get_text("historical")):].strip()
-            elif actual_backup_name.startswith(self.get_text("current")):
-                actual_backup_name = actual_backup_name[len(self.get_text("current")):].strip()
-
-            backup_path = os.path.join(self.saves_base_path, "backup", actual_backup_name)
-
-            if not messagebox.askyesno(
-                self.get_text("confirm_restore_title"),
-                f"{self.get_text("confirm_restore_message")} \n{self.get_text("warning_overwrite")}"
-            ):
-                return
-
-            try:
-                # Encontrar a pasta de save original
-                original_save_folder_name = actual_backup_name.split("_backup_")[0] if "_backup_" in actual_backup_name else actual_backup_name
-                original_save_path = os.path.join(self.saves_base_path, original_save_folder_name)
-
-                # Remover save original se existir
-                if os.path.exists(original_save_path):
-                    shutil.rmtree(original_save_path)
-
-                # Copiar backup para o local original
-                shutil.copytree(backup_path, original_save_path)
-
-                self.status_var.set(self.get_text("restore_success"))
-                self.update_lists()
-                messagebox.showinfo(self.get_text("success"), self.get_text("backup_restored"))
-
-            except FileNotFoundError:
-                error_msg = f"{self.get_text("restore_error")}: {self.get_text("backup_not_found")}: {backup_path}"
-                self.status_var.set(error_msg)
-                messagebox.showerror(self.get_text("error"), error_msg)
-            except Exception as e:
-                error_msg = f"{self.get_text("restore_error")}: {str(e)}"
-                self.status_var.set(error_msg)
-                messagebox.showerror(self.get_text("error"), error_msg)
-        else:
+        if not actual_backup_name:
             messagebox.showerror(self.get_text("error"), self.get_text("invalid_backup_selection"))
+            return
+
+        backup_path = os.path.join(self.saves_base_path, "backup", actual_backup_name)
+
+        if not messagebox.askyesno(
+            self.get_text("confirm_restore_title"),
+            f"{self.get_text('confirm_restore_message')} \n{self.get_text('warning_overwrite')}"
+        ):
+            return
+
+        try:
+            original_save_folder_name = actual_backup_name.split("_backup_")[0] if "_backup_" in actual_backup_name else actual_backup_name
+            original_save_path = os.path.join(self.saves_base_path, original_save_folder_name)
+
+            if os.path.exists(original_save_path):
+                shutil.rmtree(original_save_path)
+
+            shutil.copytree(backup_path, original_save_path)
+
+            self.status_var.set(self.get_text("restore_success"))
+            self.update_lists()
+            messagebox.showinfo(self.get_text("success"), self.get_text("backup_restored"))
+
+        except FileNotFoundError:
+            error_msg = f"{self.get_text('restore_error')}: {self.get_text('backup_not_found')}: {backup_path}"
+            self.status_var.set(error_msg)
+            messagebox.showerror(self.get_text("error"), error_msg)
+        except Exception as e:
+            error_msg = f"{self.get_text('restore_error')}: {str(e)}"
+            self.status_var.set(error_msg)
+            messagebox.showerror(self.get_text("error"), error_msg)
 
     def delete_backup(self):
         """Exclui o backup selecionado"""
@@ -1095,46 +1077,35 @@ class BackupSavesEnhancedApp:
             messagebox.showwarning(self.get_text("warning"), self.get_text("select_backup"))
             return
 
-        # Obter o texto completo da seleção da listbox
         selected_text = self.backups_listbox.get(selection[0])
+        actual_backup_name = self.extract_backup_name(selected_text)
 
-        # Extrair o nome da pasta de backup do texto exibido na listbox
-        parts = selected_text.split(' | ')
-        if len(parts) > 0:
-            name_with_type = parts[0].strip()
+        if not actual_backup_name:
+            messagebox.showerror(self.get_text("error"), self.get_text("invalid_backup_selection"))
+            return
 
-            import re
-            actual_backup_name = re.sub(r'^[\s\S]*?[a-zA-Z0-9]', '', name_with_type).strip()
+        backup_path = os.path.join(self.saves_base_path, "backup", actual_backup_name)
 
-            if actual_backup_name.startswith(self.get_text("historical")):
-                actual_backup_name = actual_backup_name[len(self.get_text("historical")):].strip()
-            elif actual_backup_name.startswith(self.get_text("current")):
-                actual_backup_name = actual_backup_name[len(self.get_text("current")):].strip()
+        if not messagebox.askyesno(
+            self.get_text("confirm_delete_title"),
+            f"{self.get_text('confirm_delete_message')} \n{actual_backup_name}"
+        ):
+            return
 
-            backup_path = os.path.join(self.saves_base_path, "backup", actual_backup_name)
-
-            if not messagebox.askyesno(
-                self.get_text("confirm_delete_title"),
-                f"{self.get_text("confirm_delete_message")} \n{actual_backup_name}"
-            ):
-                return
-
-            try:
-                if os.path.exists(backup_path):
-                    shutil.rmtree(backup_path)
-                    self.status_var.set(self.get_text("delete_success"))
-                    self.update_lists()
-                    messagebox.showinfo(self.get_text("success"), self.get_text("backup_deleted"))
-                else:
-                    error_msg = f"{self.get_text("delete_error")}: {self.get_text("backup_not_found")}: {backup_path}"
-                    self.status_var.set(error_msg)
-                    messagebox.showerror(self.get_text("error"), error_msg)
-            except Exception as e:
-                error_msg = f"{self.get_text("delete_error")}: {str(e)}"
+        try:
+            if os.path.exists(backup_path):
+                shutil.rmtree(backup_path)
+                self.status_var.set(self.get_text("delete_success"))
+                self.update_lists()
+                messagebox.showinfo(self.get_text("success"), self.get_text("backup_deleted"))
+            else:
+                error_msg = f"{self.get_text('delete_error')}: {self.get_text('backup_not_found')}: {backup_path}"
                 self.status_var.set(error_msg)
                 messagebox.showerror(self.get_text("error"), error_msg)
-        else:
-            messagebox.showerror(self.get_text("error"), self.get_text("invalid_backup_selection"))
+        except Exception as e:
+            error_msg = f"{self.get_text('delete_error')}: {str(e)}"
+            self.status_var.set(error_msg)
+            messagebox.showerror(self.get_text("error"), error_msg)
 
 
 if __name__ == "__main__":
